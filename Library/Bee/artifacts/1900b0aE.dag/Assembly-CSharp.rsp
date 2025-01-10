@@ -420,6 +420,7 @@
 "Assets/fight1attack.cs"
 "Assets/fight1health.cs"
 "Assets/flipp.cs"
+"Assets/force.cs"
 "Assets/playermovement.cs"
 "Assets/playermovement2.cs"
 -langversion:9.0

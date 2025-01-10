@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+
 public class playermovement2 : MonoBehaviour
 {
+    public Slider slider;
     public Rigidbody2D rb;
     public Transform tr;
     public float speed = 5f;
@@ -31,7 +33,9 @@ public class playermovement2 : MonoBehaviour
     void Start()
     {
 
-        currenthealth = 200f;
+        currenthealth = fight1health.health;
+        slider.minValue=0;
+        slider.maxValue=fight1health.health;
 
         attackpoint = a1;
     }
@@ -49,7 +53,12 @@ public class playermovement2 : MonoBehaviour
     {
         currenthealth = fight1health.health;
         movment = move.action.ReadValue<Vector2>();
-        
+        if(currenthealth>0){
+        slider.value=currenthealth;
+        }
+        else{
+            slider.value=0;
+        }
 
     }
     void FixedUpdate()
@@ -63,20 +72,33 @@ public class playermovement2 : MonoBehaviour
             
             anim.SetInteger("punch", 0);
             rb.linearVelocity = new Vector2(movment.x * speed, rb.linearVelocity.y);
-            if (movment.y == 1f && jump == false)
+            if (movment.y >0f && jump == false)
             {
-                rb.AddForce(new Vector2(rb.linearVelocity.x, 1000f));
                 anim.SetBool("jump", true);
+                rb.AddForce(new Vector2(rb.linearVelocity.x, 1750));
+                jump=true;
+                if(movment.x!=0f){
+                    if(movment.x>0f){
+                        anim.SetInteger("right", 1);
+                        attackpoint = a1;
+                        sr.flipX = false;
+                    }
+                    if(movment.x>0f){
+                        anim.SetInteger("right", 2);
+                        attackpoint = a2;
+                        sr.flipX = true;
+                    }
+                }
 
             }
-            if (movment.x == 1f)
+            if (movment.x >0f)
             {
                 anim.SetInteger("right", 1);
                 attackpoint = a1;
                 sr.flipX = false;
                 anim.SetBool("move", true);
             }
-            else if (movment.x == -1f)
+            else if (movment.x <0f)
             {
                 sr.flipX = true;
                 anim.SetInteger("right", 2);
@@ -138,7 +160,7 @@ public class playermovement2 : MonoBehaviour
             anim.SetInteger("punch", 2);
             anim.SetBool("move", false);
             rb.MovePosition(rb.position);
-            if (movment.x == 1f)
+            if (movment.x >0f)
             {
                 sr.flipX = false;
                 anim.SetInteger("right", 1);
@@ -146,7 +168,7 @@ public class playermovement2 : MonoBehaviour
 
 
             }
-            else if (movment.x == -1f)
+            else if (movment.x <0f)
             {
                 sr.flipX = true;
                 anim.SetInteger("right", 2);
@@ -166,7 +188,7 @@ public class playermovement2 : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             
-            enemy.GetComponent<damage>().TakeDamage(5);
+            g.GetComponent<damage>().TakeDamage(5);
             if (anim.GetInteger("right") == 1)
             {
                 g.GetComponent<Rigidbody2D>().AddForce(new Vector2(200f, g.GetComponent<Rigidbody2D>().linearVelocity.y));
@@ -184,7 +206,7 @@ public class playermovement2 : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             
-            enemy.GetComponent<damage>().TakeDamage(7);
+            g.GetComponent<damage>().TakeDamage(7);
             if (anim.GetInteger("right") == 1)
             {
                 g.GetComponent<Rigidbody2D>().AddForce(new Vector2(100f, g.GetComponent<Rigidbody2D>().linearVelocity.y));
@@ -209,15 +231,7 @@ public class playermovement2 : MonoBehaviour
         }
 
     }
-    private void OnCollisionExit2D(Collision2D other)
-    {
-
-        if (other.gameObject.CompareTag("Square"))
-        {
-            jump = true;
-        }
-
-    }
+     
     public void OnPunch(InputAction.CallbackContext context)
     {
         switch (context.phase)

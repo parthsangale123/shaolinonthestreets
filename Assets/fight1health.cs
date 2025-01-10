@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class fight1health : MonoBehaviour
 {
-    public static float health = 100;
+    public static float health = 200;
     public SpriteRenderer sp;
    
     public void TakeDamage(float damage)
@@ -43,7 +43,7 @@ public class fight1health : MonoBehaviour
     }
     IEnumerator die()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         
 
 

@@ -8,7 +8,7 @@ public class attackk : MonoBehaviour
 
 
     public Vector3 attackOffset;
-    public float attackRange = 2f;
+    public float attackRange = 1f;
     public LayerMask attackMask;
     
     public void Attack()
@@ -18,7 +18,7 @@ public class attackk : MonoBehaviour
         pos += transform.up * attackOffset.y;
 
         Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
-        if (colInfo != null)
+        if (colInfo!=null)
         {
             
             colInfo.GetComponent<fight1health>().TakeDamage(attackDamage);

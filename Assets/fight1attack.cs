@@ -7,7 +7,7 @@ public class fight1attack : StateMachineBehaviour
     Transform tr;
     Rigidbody2D rb;
     public float speed = 5f;
-    public float attackrange = 1.2f;
+    public float attackrange = 0.7f;
     flipp i;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -21,8 +21,13 @@ public class fight1attack : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        
+        if(force.h){
+            animator.SetTrigger("idle");
+        
+    }
+    else{
         animator.GetComponent<flipp>().LookAtPlayer();
-
         if (Vector2.Distance(tr.position, rb.position) <= attackrange)
         {
             animator.SetTrigger("attack");
@@ -35,6 +40,7 @@ public class fight1attack : StateMachineBehaviour
             rb.MovePosition(newPos);
 
         }
+    }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

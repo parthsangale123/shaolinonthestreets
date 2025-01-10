@@ -11,23 +11,26 @@
                     "id": "f08884dd-c093-4100-8f04-fc1691dece9d",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "punch",
                     "type": "Button",
                     "id": "3e24439a-6113-4395-ada5-eae7040adcc7",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "kick",
                     "type": "Button",
                     "id": "eed9dd28-aff7-4fac-9501-6accffb7fa1d",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [

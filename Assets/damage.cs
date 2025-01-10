@@ -11,23 +11,30 @@ public class damage : MonoBehaviour
     public SpriteRenderer sp;
     public Animator anim;
     
-
+    public Slider slider;
     
     
     void Start()
     {
         currenthealth = maxhealth;
-        
+        slider.maxValue=maxhealth;
+        slider.minValue=0;
 
     }
     void Update()
     {
-        
+        if(currenthealth>0){
+            slider.value=currenthealth;
+        }
+        else if (currenthealth<=0){
+            slider.value=0;
+        }
 
     }
     public void TakeDamage(int damage)
     {
         currenthealth -= damage;
+        
         Debug.Log(currenthealth);
         sp.color = new Color(210, 0, 0);
         StartCoroutine(changeback());
@@ -55,7 +62,7 @@ public class damage : MonoBehaviour
     }
     IEnumerator die()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         
         
         
