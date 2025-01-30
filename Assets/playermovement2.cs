@@ -75,7 +75,7 @@ public class playermovement2 : MonoBehaviour
             if (movment.y >0f && jump == false)
             {
                 anim.SetBool("jump", true);
-                rb.AddForce(new Vector2(rb.linearVelocity.x, 1750));
+                rb.AddForce(new Vector2(rb.linearVelocity.x, 1200));
                 jump=true;
                 if(movment.x!=0f){
                     if(movment.x>0f){

@@ -421,8 +421,11 @@
 "Assets/fight1health.cs"
 "Assets/flipp.cs"
 "Assets/force.cs"
+"Assets/house1.cs"
+"Assets/pausemenu.cs"
 "Assets/playermovement.cs"
 "Assets/playermovement2.cs"
+"Assets/roof.cs"
 -langversion:9.0
 /deterministic
 /optimize+
